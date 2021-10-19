@@ -1,22 +1,14 @@
 pragma solidity >=0.8.0 <0.9.0;
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 
-import "hardhat/console.sol";
-import "@openzeppelin/contracts/access/Ownable.sol"; //https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
-contract YourContract {
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-  //event SetPurpose(address sender, string purpose);
+contract YourContract is ERC20, Ownable {
+    constructor() ERC20("ERC20PatronageReceipt", "MTK") {}
 
-  string public purpose = "Building Unstoppable Apps!!!";
-  mapping(uint256 => uint256) public price; //in wei
-  constructor() {
-    // what should we do on deploy?
-  }
-
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      //emit SetPurpose(msg.sender, purpose);
-  }
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
 }
