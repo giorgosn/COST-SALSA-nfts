@@ -250,10 +250,10 @@ function App(props) {
   ]);
 
   // keep track of a variable from the contract in the local React state:
-  const purpose = useContractReader(readContracts, "YourContract", "purpose");
+  const purpose = useContractReader(readContracts, "ERC721HarbergerLicense", "purpose");
 
   // 📟 Listen for broadcast events
-  const setPurposeEvents = useEventListener(readContracts, "YourContract", "SetPurpose", localProvider, 1);
+  const setPurposeEvents = useEventListener(readContracts, "ERC721HarbergerLicense", "SetPurpose", localProvider, 1);
 
   /*
   const addressFromENS = useResolveName(mainnetProvider, "austingriffith.eth");
@@ -513,7 +513,7 @@ function App(props) {
             */}
 
             <Contract
-              name="YourContract"
+              name="ERC721HarbergerLicense"
               signer={userSigner}
               provider={localProvider}
               address={address}
