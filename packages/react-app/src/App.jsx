@@ -459,7 +459,7 @@ function App(props) {
               }}
               to="/"
             >
-              YourContract
+              ERC721HarbergerLicense
             </Link>
           </Menu.Item>
           <Menu.Item key="/hints">
