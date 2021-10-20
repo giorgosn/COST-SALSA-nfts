@@ -11,6 +11,12 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     //args: [ "Hello", ethers.utils.parseEther("1.5") ],
     log: true,
   });
+  await deploy("Supervisor", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    //args: [ "Hello", ethers.utils.parseEther("1.5") ],
+    log: true,
+  });
 
 
 
@@ -50,4 +56,4 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   });
   */
 };
-module.exports.tags = ["ERC721HarbergerLicense"];
+module.exports.tags = ["ERC721HarbergerLicense","Supervisor"];

@@ -462,6 +462,16 @@ function App(props) {
               ERC721HarbergerLicense
             </Link>
           </Menu.Item>
+          <Menu.Item key="/supervisor">
+            <Link
+              onClick={() => {
+                setRoute("/supervisor");
+              }}
+              to="/supervisor"
+            >
+              Supervisor
+            </Link>
+          </Menu.Item>
           <Menu.Item key="/hints">
             <Link
               onClick={() => {
@@ -514,6 +524,22 @@ function App(props) {
 
             <Contract
               name="ERC721HarbergerLicense"
+              signer={userSigner}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+              contractConfig={contractConfig}
+            />
+          </Route>
+          <Route exact path="/supervisor">
+            {/*
+                🎛 this scaffolding is full of commonly used components
+                this <Contract/> component will automatically parse your ABI
+                and give you a form to interact with it locally
+            */}
+
+            <Contract
+              name="Supervisor"
               signer={userSigner}
               provider={localProvider}
               address={address}
