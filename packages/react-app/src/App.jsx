@@ -472,6 +472,17 @@ function App(props) {
               Supervisor
             </Link>
           </Menu.Item>
+          <Menu.Item key="/vcg_operator">
+            <Link
+              onClick={() => {
+                setRoute("/vcg_operator");
+              }}
+              to="/vcg_operator"
+            >
+              VCG_operator
+            </Link>
+          </Menu.Item>
+          
           <Menu.Item key="/hints">
             <Link
               onClick={() => {
@@ -540,6 +551,22 @@ function App(props) {
 
             <Contract
               name="Supervisor"
+              signer={userSigner}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+              contractConfig={contractConfig}
+            />
+          </Route>
+          <Route exact path="/vcg_operator">
+            {/*
+                🎛 this scaffolding is full of commonly used components
+                this <Contract/> component will automatically parse your ABI
+                and give you a form to interact with it locally
+            */}
+
+            <Contract
+              name="VCG_operator"
               signer={userSigner}
               provider={localProvider}
               address={address}

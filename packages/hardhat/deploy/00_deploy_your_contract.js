@@ -17,6 +17,22 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     //args: [ "Hello", ethers.utils.parseEther("1.5") ],
     log: true,
   });
+  const exampleLibrary = await deploy("VCGLib1", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    //args: [ "Hello", ethers.utils.parseEther("1.5") ],
+    log: true,
+  });
+
+  await deploy("VCG_operator", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    libraries:{
+      VCGLib1: exampleLibrary.address
+    },
+    //args: [ "Hello", ethers.utils.parseEther("1.5") ],
+    log: true,
+  });
 
 
 
@@ -56,4 +72,4 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   });
   */
 };
-module.exports.tags = ["ERC721HarbergerLicense","Supervisor"];
+module.exports.tags = ["ERC721HarbergerLicense","Supervisor","VCGLib1","VCG_operator"];
