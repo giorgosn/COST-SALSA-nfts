@@ -1,77 +1,62 @@
-pragma solidity >=0.8.0 <0.9.0;
-//SPDX-License-Identifier: MIT
+pragma solidity 0.5.17;
+
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/ERC721Enumerable.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/ERC721Metadata.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/ERC721MetadataMintable.sol";
 
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-
-
-contract ERC721Patronage is ERC721, ERC721Enumerable, ERC721Burnable, Ownable
+contract ERC721Patronage is
+    Initializable,
+    ERC721,
+    ERC721Enumerable,
+    ERC721Metadata,
+    ERC721MetadataMintable
 {
     address public steward;
 
-    constructor(string memory name,string memory symbol) ERC721("MyToken", "MTK") {}
-
-    function safeMint(address to, uint256 tokenId) public onlyOwner {
-        _safeMint(to, tokenId);
+    function setup(
+        address _steward,
+        string memory name,
+        string memory symbol,
+        address minter
+    ) public initializer {
+        steward = _steward;
+        ERC721.initialize();
+        ERC721Enumerable.initialize();
+        ERC721Metadata.initialize(name, symbol);
+        // Initialize the minter and pauser roles, and renounce them
+        ERC721MetadataMintable.initialize(address(this));
+        _removeMinter(address(this));
+        _addMinter(minter);
     }
 
-    function _baseURI() internal pure override returns (string memory) {
-        return "Test";
-    }
-
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId)
+    function _isApprovedOrOwner(address spender, uint256 tokenId)
         internal
-        override(ERC721, ERC721Enumerable)
-    {
-        super._beforeTokenTransfer(from, to, tokenId);
-    }
-
-    function supportsInterface(bytes4 interfaceId)
-        public
         view
-        override(ERC721, ERC721Enumerable)
         returns (bool)
     {
-        return super.supportsInterface(interfaceId);
+        return (spender == steward);
+        /*
+          // NOTE: temporarily disabling sending of the tokens independently. A protective messure since it isn't clear to users how this function should work.
+          //       Will re-add once a mechanism is agreed on by the community.
+          || ERC721._isApprovedOrOwner(spender, tokenId)
+          */
     }
 
+    // function transferFrom(address from, address to, uint256 tokenId) public {
+    //     if (msg.sender != steward) {
+    //         HarbergerSteward stewardContract = HarbergerSteward(steward);
 
-}
+    //         // Calculate remaining deposit for the two addresses involved in transfer.
+    //         stewardContract._collectPatronagePatron(to);
+    //         stewardContract._collectPatronage(tokenId);
 
+    //         // Do not allow someone to transfer a token if their deposit is Zero.
+    //         require(stewardContract.deposit(to) > 0, "Recipient needs to have a deposit.");
+    //         require(stewardContract.deposit(from) > 0, "Sender deposit has run out.");
+    //     }
 
-
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-
-contract MyToken is ERC721, ERC721Enumerable, ERC721Burnable, Ownable {
-    constructor() ERC721("MyToken", "MTK") {}
-
-    function safeMint(address to, uint256 tokenId) public onlyOwner {
-        _safeMint(to, tokenId);
-    }
-
-    function _baseURI() internal pure override returns (string memory) {
-        return "Test";
-    }
-
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId)
-        internal
-        override(ERC721, ERC721Enumerable)
-    {
-        super._beforeTokenTransfer(from, to, tokenId);
-    }
-
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721Enumerable)
-        returns (bool)
-    {
-        return super.supportsInterface(interfaceId);
-    }
+    //     ERC721.transferFrom(from, to, tokenId);
+    // }
 }
