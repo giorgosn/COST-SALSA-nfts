@@ -5,7 +5,6 @@ import "@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 
-
 contract ERC20PatronageReceipt is
     ERC20,
     ERC20Mintable,
