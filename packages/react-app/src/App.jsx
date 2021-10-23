@@ -459,7 +459,37 @@ function App(props) {
               }}
               to="/"
             >
-              HarbergerSteward Contract
+              HarbergerSteward
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/mintManager">
+            <Link
+              onClick={() => {
+                setRoute("/mintManager");
+              }}
+              to="/"
+            >
+              MintManager
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/ERC20PatronageReceipt">
+            <Link
+              onClick={() => {
+                setRoute("/ERC20PatronageReceipt");
+              }}
+              to="/"
+            >
+              ERC20PatronageReceipt
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/ERC721Patronage">
+            <Link
+              onClick={() => {
+                setRoute("/ERC721Patronage");
+              }}
+              to="/"
+            >
+              ERC721Patronage
             </Link>
           </Menu.Item>
           <Menu.Item key="/hints">
@@ -514,6 +544,54 @@ function App(props) {
 
             <Contract
               name="HarbergerSteward"
+              signer={userSigner}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+              contractConfig={contractConfig}
+            />
+          </Route>
+          <Route exact path="/mintManager">
+            {/*
+                🎛 this scaffolding is full of commonly used components
+                this <Contract/> component will automatically parse your ABI
+                and give you a form to interact with it locally
+            */}
+
+            <Contract
+              name="MintManager"
+              signer={userSigner}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+              contractConfig={contractConfig}
+            />
+          </Route>
+          <Route exact path="/ERC20PatronageReceipt">
+            {/*
+                🎛 this scaffolding is full of commonly used components
+                this <Contract/> component will automatically parse your ABI
+                and give you a form to interact with it locally
+            */}
+
+            <Contract
+              name="ERC20PatronageReceipt"
+              signer={userSigner}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+              contractConfig={contractConfig}
+            />
+          </Route>
+          <Route exact path="/ERC721Patronage">
+            {/*
+                🎛 this scaffolding is full of commonly used components
+                this <Contract/> component will automatically parse your ABI
+                and give you a form to interact with it locally
+            */}
+
+            <Contract
+              name="ERC721Patronage"
               signer={userSigner}
               provider={localProvider}
               address={address}

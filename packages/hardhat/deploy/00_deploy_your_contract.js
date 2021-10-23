@@ -11,6 +11,24 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     //args: [ "Hello", ethers.utils.parseEther("1.5") ],
     log: true,
   });
+  await deploy("MintManager", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    //args: [ "Hello", ethers.utils.parseEther("1.5") ],
+    log: true,
+  });
+  await deploy("ERC20PatronageReceipt", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [ "SALSA","CLS",16 ],
+    log: true,
+  });
+  await deploy("ERC721Patronage", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    //args: [ "Hello", ethers.utils.parseEther("1.5") ],
+    log: true,
+  });
 
   /*
     // Getting a previously deployed contract
@@ -48,4 +66,4 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   });
   */
 };
-module.exports.tags = ["HarbergerSteward"];
+module.exports.tags = ["HarbergerSteward","MintManager","ERC20PatronageReceipt","ERC721Patronage"];
