@@ -513,7 +513,7 @@ function App(props) {
             */}
 
             <Contract
-              name="YourContract"
+              name="Test721Token"
               signer={userSigner}
               provider={localProvider}
               address={address}
