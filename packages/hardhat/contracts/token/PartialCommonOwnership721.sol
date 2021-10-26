@@ -22,7 +22,7 @@ struct TitleTransferEvent {
 /// and can be repurchased at any price > 0.
 /// @dev This code was originally forked from ThisArtworkIsAlwaysOnSale's `v2_contracts/ArtSteward.sol`
 /// contract by Simon de la Rouviere.
-contract PartialCommonOwnership721 is ERC721 {
+contract PartialCommonOwnership721 is ERC721  {
   /// @notice Alert of purchase.
   /// @param tokenId ID of token.
   /// @param owner Address of new token owner.
